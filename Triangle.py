@@ -31,7 +31,7 @@ def classifyTriangle(a,b,c):
     if a > 200 or b > 200 or c > 200:
         return 'InvalidInput'
         
-    if a <= 0 or b <= b or c <= 0:
+    if a <= 0 or b <= 0 or c <= 0:
         return 'InvalidInput'
     
     # verify that all 3 inputs are integers  
@@ -43,15 +43,37 @@ def classifyTriangle(a,b,c):
     # is important for correctness
     # the sum of any two sides must be strictly less than the third side
     # of the specified shape is not a triangle
-    if (a >= (b - c)) or (b >= (a - c)) or (c >= (a + b)):
+    if (a >= (b + c)) or (b >= (a + c)) or (c >= (a + b)):
         return 'NotATriangle'
         
     # now we know that we have a valid triangle 
-    if a == b and b == a:
+    if a == b and b == c:
         return 'Equilateral'
-    elif ((a * 2) + (b * 2)) == (c * 2):
+    elif (((a * a) + (b * b)) == (c * c)) or (((a * a) + (c * c)) == (b * b)) or (((c * c) + (b * b)) == (a * a)):
         return 'Right'
     elif (a != b) and  (b != c) and (a != b):
         return 'Scalene'
     else:
         return 'Isoceles'
+
+if __name__ == '__main__':
+    print('Running unit tests')
+    
+    print (classifyTriangle(3,4,5))
+    print (classifyTriangle(5,3,4))
+    print (classifyTriangle(5,4,3))
+    print (classifyTriangle(1,1,1))
+    print (classifyTriangle(2,2,2))
+    print (classifyTriangle(1,2,2))
+    print (classifyTriangle(2,2,1))
+    print (classifyTriangle(3,2,2))
+    print (classifyTriangle(1,2,1))
+    print (classifyTriangle(1,2,3))
+    print (classifyTriangle(10,20,30))
+    print (classifyTriangle(7,9,8))
+    print (classifyTriangle(7,8,9))
+    print (classifyTriangle(9,8,7))
+    print (classifyTriangle("a","a","a"))
+    print (classifyTriangle(-1,-1,-1))
+    print (classifyTriangle(200,201,200))
+    print (classifyTriangle(100,"a",100))
